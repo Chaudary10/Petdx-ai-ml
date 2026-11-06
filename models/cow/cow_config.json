@@ -1,0 +1,11 @@
+{
+  "classes": [
+    "Healthy",
+    "Lumpy_skin",
+    "Mange",
+    "Ringworm"
+  ],
+  "input_size": 224,
+  "pixel_range": "0-255 float, NO /255 scaling",
+  "unsure_below": 0.8
+}

@@ -24,8 +24,8 @@ Uploaded image
 | File | Description |
 |---|---|
 | `notebooks/validator.ipynb` | Full Colab notebook: dataset prep, training, evaluation, TFLite conversion, and stress testing |
-| `models/petdx_validator_v2_best.keras` | Trained Keras model (11.6 MB) |
-| `models/petdx_validator_v2.tflite` | TFLite-converted model for Android (2.6 MB) — **use this one for the app** |
+| `models/validator/petdx_validator_v2_best.keras` | Trained Keras model (11.6 MB) |
+| `models/validator/petdx_validator_v2.tflite` | TFLite-converted model for Android (2.6 MB) — **use this one for the app** |
 
 ## Model details
 
@@ -101,3 +101,20 @@ Beyond the benchmark test set, the model was stress-tested against real-world im
 - Alishba Noor
 
 Supervisor: Ms. Rameeza Shaheen
+
+## Stage-2 Disease Models
+
+Each model sits in its own folder under `models/` with a labels file. Test accuracy is on a held-out test set.
+
+| Animal | Folder | Model file | Classes | Test accuracy |
+|---|---|---|---|---|
+| Dog | `models/dog/` | `dog_v2_float16.tflite` | Dermatitis, Healthy, Hypersensitivity, demodicosis, ringworm | 89.1% (MobileNetV2) |
+| Cat | `models/cat/` | `cat_skin_disease_model.tflite` | flea allergy, scabies, healthy, ringworm, dermatitis | 78.5% (EfficientNetB0, float16) |
+| Goat | `models/goat/` | `goat_skin_disease_model.tflite` | cheesy_gland, contagious_ecthyma, healthy, lice_infestation, mange_scabies | 91.2% (EfficientNetB0) |
+| Cow | `models/cow/` | `cow_model_v1.tflite` | Healthy, Lumpy_skin, Mange, Ringworm | 88.2% (EfficientNetB0) |
+
+Notes:
+- Class order must match the labels file in each folder (`dog_labels.txt`, `cat_skin_disease_labels.txt`, `goat_skin_disease_labels.txt`, `cow_config.json`).
+- The cow folder also has `cow_model_v1_deployment_guide.md` and the Keras backup `cow_model_v1.keras`.
+- Cat is the weakest model. With a 0.5 confidence cut-off it answers about 81% of photos at 88.6% accuracy.
+- Cow at a 0.8 confidence cut-off answers about 78% of test photos at 95.9% accuracy.

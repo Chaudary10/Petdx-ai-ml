@@ -2,4 +2,4 @@ cheesy_gland
 contagious_ecthyma
 healthy
 lice_infestation
-pink_eye
+mange_scabies
